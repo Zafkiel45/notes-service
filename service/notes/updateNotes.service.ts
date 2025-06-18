@@ -6,15 +6,13 @@ export async function addTagForNoteService(noteTitle: string, tagsName: string[]
   const addTagForNote = database.prepare(`
     INSERT INTO note_tags (note_id, tag_id) VALUES ($note, $tag)
   `);
-
+ 
     try {
       const noteId = getNoteId.get({title: noteTitle}) as {id: number}; 
       
       database.transaction(() => {
         for(let tag of tagsName) {
           const tagId = createOrGetTagService(tag);
-          console.log(noteId.id, "Note id");
-          console.log(tagId, "current tag");
           addTagForNote.run({
             note: noteId.id,
             tag: tagId,

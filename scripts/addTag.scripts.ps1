@@ -4,7 +4,7 @@ $headers = @{ "Content-Type" = "application/json" }
 
 $body = @{
     noteName = "Test"
-    tags  = @("news", "documentation", "testing") 
+    tags  = @("news", "documentation", "testing", "anime") 
 } | ConvertTo-Json
 
 Invoke-RestMethod -Uri "http://localhost:3001/notes/addTags" -Method Post -Headers $headers -Body $body
