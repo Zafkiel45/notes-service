@@ -1,4 +1,4 @@
-import { database } from "../database/config/config.database";
+import { database } from "../../database/config/config.database";
 
 export function createOrGetTagService(name: string): number {
   const dbQuery = database.query(`SELECT id FROM tags WHERE name = $name`);

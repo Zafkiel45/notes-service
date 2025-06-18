@@ -18,7 +18,7 @@ const app = Bun.serve({
       DELETE: deleteNoteByIdRoute,
       GET: getNoteByIdRoute,
       PATCH: updateNoteByIdRoute,
-    }
+    },
   }
 });
 

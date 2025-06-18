@@ -1,5 +1,5 @@
 import { database } from "../../database/config/config.database";
-import { createOrGetTagService } from "../tags.service";
+import { createOrGetTagService } from "../tags/tags.service";
 
 export async function addTagForNoteService(noteTitle: string, tagsName: string[]) {
   const getNoteId = database.query(`SELECT id FROM notes WHERE title = $title`);
