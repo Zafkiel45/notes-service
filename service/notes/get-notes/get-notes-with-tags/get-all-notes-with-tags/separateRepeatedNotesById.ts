@@ -1,4 +1,4 @@
-import type { NotesWithTags } from "../../../../database/models/notes.model";
+import type { NotesWithTags } from "../../../../../database/models/notes.model";
 
 export function separateNotesById(arrId: number[], noteArr: NotesWithTags[]) {
   const separatedRepeatedNotesById: NotesWithTags[][] = []

@@ -2,7 +2,7 @@ import type { BunRequest } from "bun";
 import { getNotesByIdService } from "../service/notes/get-notes/getNotes.service";
 import { isInvalidId } from "../middleware/isInvalidNumber.middleware";
 import { ApiError } from "../errors/ApiError.error";
-import { getAllNotesWithTagService } from "../service/notes/get-notes/get-notes-with-tags/getAllNotesWithTags";
+import { getAllNotesWithTagService } from "../service/notes/get-notes/get-notes-with-tags/get-all-notes-with-tags/getAllNotesWithTags";
 
 export async function getNoteByIdRoute(req: BunRequest<"/notes/:id">) {
   const id = parseInt(req.params.id);

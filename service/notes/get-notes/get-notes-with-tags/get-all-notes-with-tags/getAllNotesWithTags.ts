@@ -1,5 +1,5 @@
-import { database } from "../../../../database/config/config.database";
-import type { NotesWithTags } from "../../../../database/models/notes.model";
+import { database } from "../../../../../database/config/config.database";
+import type { NotesWithTags } from "../../../../../database/models/notes.model";
 import { extractNotesFromSeparatedArr } from "./extractNotesFromSeparatedArr";
 import { removeDuplicatedIds } from "./removeDuplicatedIds";
 import { separateNotesById } from "./separateRepeatedNotesById";
