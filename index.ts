@@ -1,7 +1,7 @@
 import './database/migrations/migrations.database';
 import { createNoteRoute } from './routes/createNotes.route';
 import { deleteNoteByIdRoute } from './routes/deleteNotes.route';
-import { getNoteByIdRoute, getNotesWithTagsRoute } from './routes/getNotes.route';
+import { getNoteByIdRoute, getNotesByTagRoute, getNotesWithTagsRoute } from './routes/getNotes.route';
 import { addTagsForNoteRoute, updateNoteByIdRoute } from './routes/updateNotes.route';
 
 const app = Bun.serve({
@@ -22,6 +22,9 @@ const app = Bun.serve({
     "/tags/notes": {
       GET: getNotesWithTagsRoute,
     },
+    "/tags/notes/:tag": {
+      GET: getNotesByTagRoute,
+    }
   }
 });
 
