@@ -1,4 +1,4 @@
-import { database } from "../../../../../database/config/config.database";
+import { database } from "../../../../database/config/config.database";
 
 export function getNotesBytagService(tagId: number) {
   try {

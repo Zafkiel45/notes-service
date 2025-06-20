@@ -1,6 +1,6 @@
-import { database } from "../../../database/config/config.database";
-import type { NotesWithTags } from "../../../database/models/notes.model";
-import { extractNotesFromSeparatedArr } from "./get-notes-with-tags/get-all-notes-with-tags/extractNotesFromSeparatedArr";
+import { database } from "../../../../database/config/config.database";
+import type { NotesWithTags } from "../../../../database/models/notes.model";
+import { extractNotesFromSeparatedArr } from "../../../../utils/extractNotesFromSeparatedArr";
 
 export async function getNotesByIdService(id: number) {
   const dbQuery = database.query(
