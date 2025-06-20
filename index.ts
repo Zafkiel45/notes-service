@@ -8,24 +8,20 @@ const app = Bun.serve({
   port: 3001,
   idleTimeout: 0,
   routes: {
-    "/notes": {
-      "POST": createNoteRoute,
+    "/api/notes": {
+      GET: getNotesWithTagsRoute,
+      POST: createNoteRoute,
     },
-    "/notes/addTags": {
-      "POST": addTagsForNoteRoute,
+    "/api/notes/:id/tags": {
+      GET: getNotesByTagRoute,
+      POST: addTagsForNoteRoute,
     },
-    "/notes/:id": {
+    "/api/notes/:id": {
       DELETE: deleteNoteByIdRoute,
       GET: getNoteByIdRoute,
       PATCH: updateNoteByIdRoute,
     },
-    "/tags/notes": {
-      GET: getNotesWithTagsRoute,
-    },
-    "/tags/notes/:tag": {
-      GET: getNotesByTagRoute,
-    }
-  }
+  },
 });
 
 console.log('Backend started at', app.port);
