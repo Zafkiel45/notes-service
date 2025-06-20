@@ -1,5 +1,6 @@
 import { database } from "../../../../database/config/config.database";
 import type { NotesWithTags } from "../../../../database/models/notes.model";
+import { DatabaseError } from "../../../../errors/databaseError.error";
 import { extractNotesFromSeparatedArr } from "../../../../utils/extractNotesFromSeparatedArr";
 import { removeDuplicatedIds } from "./removeDuplicatedIds";
 import { separateNotesById } from "./separateRepeatedNotesById";
@@ -27,7 +28,7 @@ export async function getAllNotesWithTagService() {
     );
 
     return extractNotesFromSeparatedArr(separatedNotes);
-  } catch (err) {
-    console.log(err);
+  } catch {
+    throw new DatabaseError("The note was not found successfully");
   };
 };

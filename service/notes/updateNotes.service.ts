@@ -1,4 +1,5 @@
 import { database } from "../../database/config/config.database";
+import { DatabaseError } from "../../errors/databaseError.error";
 import { createOrGetTagService } from "../tags/tags.service";
 
 export async function addTagForNoteService(id: number, tagsName: string[]) {
@@ -16,8 +17,8 @@ export async function addTagForNoteService(id: number, tagsName: string[]) {
         });
       };
     })();
-  } catch (err) {
-    console.error(err);
+  } catch {
+    throw new DatabaseError("The note was not updated successfully");
   };
 };
 

@@ -1,5 +1,6 @@
 import { database } from "../../../../database/config/config.database";
 import type { NotesWithTags } from "../../../../database/models/notes.model";
+import { DatabaseError } from "../../../../errors/databaseError.error";
 import { extractNotesFromSeparatedArr } from "../../../../utils/extractNotesFromSeparatedArr";
 
 export async function getNotesByIdService(id: number) {
@@ -19,8 +20,8 @@ export async function getNotesByIdService(id: number) {
     const notes = dbQuery.all({ id }) as NotesWithTags[];
     const formatedNote = extractNotesFromSeparatedArr([notes])
     return formatedNote;
-  } catch (err) {
-    console.error(err);
+  } catch {
+    throw new DatabaseError("The note was not found successfully");
   }
 }
 

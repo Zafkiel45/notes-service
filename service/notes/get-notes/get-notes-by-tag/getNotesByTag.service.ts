@@ -1,4 +1,5 @@
 import { database } from "../../../../database/config/config.database";
+import { DatabaseError } from "../../../../errors/databaseError.error";
 
 export function getNotesBytagService(tagId: number) {
   try {
@@ -16,7 +17,7 @@ export function getNotesBytagService(tagId: number) {
     `).all({id: tagId});
 
     return notes;
-  } catch(err) {
-    console.error(err);
+  } catch {
+    throw new DatabaseError("The note was not found successfully");
   }
 };

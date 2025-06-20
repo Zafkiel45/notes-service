@@ -1,4 +1,5 @@
 import { database } from "../../database/config/config.database";
+import { DatabaseError } from "../../errors/databaseError.error";
 
 export function createOrGetTagService(name: string): number {
   try {
@@ -15,8 +16,8 @@ function getTagService(name: string) {
 
   try {
     return dbQuery.get({name}) as {id: number};
-  } catch(err) {
-    console.error(err);
+  } catch {
+    throw new DatabaseError("The tag was not found successfully");
   }
 };
 
@@ -25,7 +26,7 @@ function createTagService(name: string) {
    const dbString = database.prepare(`INSERT INTO tags (name) VALUES ($name)`);
    const tagId = database.transaction(() => dbString.run({name}).lastInsertRowid);
    return tagId();
-  } catch(err) {
-    console.log(err);
+  } catch{
+    throw new DatabaseError("The tag was not created successfully");
   }
 };

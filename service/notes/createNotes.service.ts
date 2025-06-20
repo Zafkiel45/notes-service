@@ -1,4 +1,5 @@
 import { database } from "../../database/config/config.database";
+import { DatabaseError } from "../../errors/databaseError.error";
 
 export async function createNoteService(title: string, body: string) {
   const dbQuery = database.prepare(`
@@ -7,8 +8,8 @@ export async function createNoteService(title: string, body: string) {
 
   try {
     await database.transaction(() => {dbQuery.run({title,body})})();
-  } catch (err) {
-    console.error(err);
+  } catch {
+    throw new DatabaseError("The note was not created successfully");
   };
 };
 
