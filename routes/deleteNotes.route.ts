@@ -3,7 +3,7 @@ import { isInvalidId } from "../middleware/isInvalidNumber.middleware";
 import { deleteNoteByIdService } from "../service/notes/deleteNotes.service";
 import { ApiError } from "../errors/ApiError.error";
 
-export async function deleteNoteByIdRoute(req: BunRequest<"/notes/:id">) {
+export async function deleteNoteByIdRoute(req: BunRequest<"/api/notes/:id">) {
   const id = parseInt(req.params.id);
 
   try { 

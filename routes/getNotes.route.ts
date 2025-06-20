@@ -5,7 +5,7 @@ import { ApiError } from "../errors/ApiError.error";
 import { getAllNotesWithTagService } from "../service/notes/get-notes/get-notes-with-tags/get-all-notes-with-tags/getAllNotesWithTags";
 import { getNotesBytagService } from "../service/notes/get-notes/get-notes-with-tags/get-notes-by-tag/getNotesByTag.service";
 
-export async function getNoteByIdRoute(req: BunRequest<"/notes/:id">) {
+export async function getNoteByIdRoute(req: BunRequest<"/api/notes/:id">) {
   const id = parseInt(req.params.id);
 
   try {
@@ -49,8 +49,8 @@ export async function getNotesWithTagsRoute() {
   }
 }
 
-export function getNotesByTagRoute(req: BunRequest<"/tags/notes/:tag">) {
-  const tagId = parseInt(req.params.tag);
+export function getNotesByTagRoute(req: BunRequest<"/api/notes/:id/tags">) {
+  const tagId = parseInt(req.params.id);
   try {
     isInvalidId(tagId);
     return Response.json(

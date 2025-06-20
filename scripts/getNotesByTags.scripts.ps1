@@ -1,1 +1,1 @@
-Invoke-RestMethod -Uri "http://localhost:3001/tags/notes/2" -Method Get
+Invoke-RestMethod -Uri "http://localhost:3001/api/notes/2/tags" -Method Get

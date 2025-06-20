@@ -1,27 +1,24 @@
 import { database } from "../../database/config/config.database";
 import { createOrGetTagService } from "../tags/tags.service";
 
-export async function addTagForNoteService(noteTitle: string, tagsName: string[]) {
-  const getNoteId = database.query(`SELECT id FROM notes WHERE title = $title`);
+export async function addTagForNoteService(id: number, tagsName: string[]) {
   const addTagForNote = database.prepare(`
     INSERT INTO note_tags (note_id, tag_id) VALUES ($note, $tag)
   `);
- 
-    try {
-      const noteId = getNoteId.get({title: noteTitle}) as {id: number}; 
-      
-      database.transaction(() => {
-        for(let tag of tagsName) {
-          const tagId = createOrGetTagService(tag);
-          addTagForNote.run({
-            note: noteId.id,
-            tag: tagId,
-          });
-        };
-      })();
-    } catch (err) {
-      console.error(err);
-    };
+
+  try {
+    database.transaction(() => {
+      for (let tag of tagsName) {
+        const tagId = createOrGetTagService(tag);
+        addTagForNote.run({
+          note: id,
+          tag: tagId,
+        });
+      };
+    })();
+  } catch (err) {
+    console.error(err);
+  };
 };
 
 export async function updateNoteByIdService(

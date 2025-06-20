@@ -4,7 +4,7 @@ import { ApiError } from "../errors/ApiError.error";
 import { createNoteService } from "../service/notes/createNotes.service";
 import { isMaliciousString } from "../middleware/isInvalidInput.middleware";
 
-export async function createNoteRoute(req: BunRequest<"/notes">) {
+export async function createNoteRoute(req: BunRequest<"/api/notes">) {
   const { body, title } = (await req.json()) as Notes;
 
   if(isMaliciousString(body)){

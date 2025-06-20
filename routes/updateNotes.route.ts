@@ -6,25 +6,21 @@ import { isMaliciousString } from "../middleware/isInvalidInput.middleware";
 import { isInvalidString } from "../middleware/isInvalidString.middleware";
 
 
-export async function addTagsForNoteRoute(req: BunRequest<"/notes/addTags">) {
-  const { noteName, tags} = await req.json() as {noteName: string, tags: string[]};
+export async function addTagsForNoteRoute(req: BunRequest<"/api/notes/:id/tags">) {
+  const id = parseInt(req.params.id);
+  const { tags } = await req.json() as {noteName: string, tags: string[]};
   
-  if(isMaliciousString(noteName)){
-    throw new ApiError(400, "Bad Request", "Invalid Input");
-  };
-
-  for(const tag of tags) {
-    if(isMaliciousString(tag)){
-      throw new ApiError(400, "Bad Request", "Invalid Input");
-    };
-  };
-
   try {
-    await addTagForNoteService(noteName, tags);
-    return Response.json(
-      {message: `Tags Added for ${noteName} added successfuly`},
-      {status: 200, statusText: "Ok"}
-    );
+    isInvalidId(id);
+    
+    for(const tag of tags) {
+      if(isMaliciousString(tag)){
+        throw new ApiError(400, "Bad Request", "Invalid Input");
+      };
+    };
+
+    await addTagForNoteService(id, tags);
+    return Response.json({message: `Tags added successfuly`},{status: 200, statusText: "Ok"});
   } catch (err) {
     if(err instanceof ApiError) {
       return Response.json(
@@ -40,7 +36,7 @@ export async function addTagsForNoteRoute(req: BunRequest<"/notes/addTags">) {
   };
 };
 
-export async function updateNoteByIdRoute(req: BunRequest<"/notes/:id">) {
+export async function updateNoteByIdRoute(req: BunRequest<"/api/notes/:id">) {
   const id = parseInt(req.params.id);
   const { title, body } = await req.json() as {title: string, body: string};
 
