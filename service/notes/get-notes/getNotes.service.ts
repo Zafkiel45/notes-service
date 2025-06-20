@@ -1,16 +1,24 @@
 import { database } from "../../../database/config/config.database";
 import type { NotesWithTags } from "../../../database/models/notes.model";
 import { extractNotesFromSeparatedArr } from "./get-notes-with-tags/get-all-notes-with-tags/extractNotesFromSeparatedArr";
-import { removeDuplicatedIds } from "./get-notes-with-tags/get-all-notes-with-tags/removeDuplicatedIds";
-import { separateNotesById } from "./get-notes-with-tags/get-all-notes-with-tags/separateRepeatedNotesById";
 
 export async function getNotesByIdService(id: number) {
   const dbQuery = database.query(
-    `SELECT title, body FROM notes WHERE id = $id`
+    `SELECT 
+      notes.title AS note_title,
+      notes.body AS note_body, 
+      tags.name AS tag_name,  
+      tags.id AS tag_id
+      FROM notes 
+      LEFT JOIN note_tags ON notes.id = note_tags.note_id
+      LEFT JOIN tags ON tags.id = note_tags.tag_id
+      WHERE notes.id = $id`
   );
-
+  
   try {
-    return dbQuery.get({ id });
+    const notes = dbQuery.all({ id }) as NotesWithTags[];
+    const formatedNote = extractNotesFromSeparatedArr([notes])
+    return formatedNote;
   } catch (err) {
     console.error(err);
   }

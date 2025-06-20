@@ -1,2 +1,7 @@
-# Test the endpoint /notes/:id to the method GET
-Invoke-RestMethod -Uri "http://localhost:3001/notes/2" -Method Get 
+$response = Invoke-RestMethod -Uri "http://localhost:3001/api/notes/2" -Method Get
+
+# Access the actual array of notes inside the 'content' property
+$notes = $response.content
+
+# Now format it
+$notes | Format-Table -AutoSize
