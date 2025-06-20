@@ -1,4 +1,5 @@
-# notes-service
+# notes-service Docs:
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Zafkiel45/notes-service)
 
 To install dependencies:
 
