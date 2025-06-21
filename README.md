@@ -1,5 +1,5 @@
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Zafkiel45/notes-service)
-# notes-service Docs:
+# notes-service:
 Welcome to Notes Service. This is a sample API for managing notes. There are many features, such as getting notes by tags, managing tags, getting an aggregate of all tags with notes, and more! This project was made using: [bun](https://x.com/bunjavascript). 
 
 # Notes-service docs:
